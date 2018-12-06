@@ -340,4 +340,45 @@ class Map
     {
         $this->comment = $comment;
     }
+
+    /**
+     * Build map from array.
+     *
+     * @param array $data
+     * @return Map
+     * @throws \Exception
+     */
+    public function fromArray(array $data)
+    {
+        if (!empty($data['host'])) {
+            $this->setHost($data['host']);
+        }
+        if (!empty($data['hostIsRegexPattern'])) {
+            $this->setHostIsRegexPattern($data['hostIsRegexPattern']);
+        }
+        if (!empty($data['hostRegexPatternNegate'])) {
+            $this->setHostRegexPatternNegate($data['hostRegexPatternNegate']);
+        }
+        if (!empty($data['urlFrom'])) {
+            $this->setUrlFrom($data['urlFrom']);
+        }
+        if (!empty($data['urlFromIsRegexPattern'])) {
+            $this->setUrlFromIsRegexPattern($data['urlFromIsRegexPattern']);
+        }
+        if (!empty($data['urlFromIsNoCase'])) {
+            $this->setUrlFromIsNoCase($data['urlFromIsNoCase']);
+        }
+        if (!empty($data['urlTo'])) {
+            $this->setUrlTo($data['urlTo']);
+        }
+        if (!empty($data['count'])) {
+            $this->setCount($data['count']);
+        }
+        if (!empty($data['countRedirects'])) {
+            $this->setCountRedirects($data['countRedirects']);
+        }
+        if (!empty($data['redirectHttpCode'])) {
+            $this->setRedirectHttpCode($data['redirectHttpCode']);
+        }
+    }
 }
