@@ -96,6 +96,15 @@ class Map
     }
 
     /**
+     * Set id.
+     * @param $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return Group
      */
     public function getGroup()
@@ -350,6 +359,9 @@ class Map
      */
     public function fromArray(array $data)
     {
+        if (!empty($data['id'])) {
+            $this->setId($data['id']);
+        }
         if (!empty($data['host'])) {
             $this->setHost($data['host']);
         }
