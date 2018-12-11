@@ -24,15 +24,15 @@ class MapFormType extends AbstractType
     /**
      * @var bool
      */
-    private $showMapRedirectCounts;
+    private $redirectCountActive;
 
     /**
      * MapFormType constructor.
-     * @param bool $showMapRedirectCounts
+     * @param bool $redirectCountsActive
      */
-    public function __construct(bool $showMapRedirectCounts)
+    public function __construct(bool $redirectCountsActive)
     {
-        $this->showMapRedirectCounts = $showMapRedirectCounts;
+        $this->redirectCountActive = $redirectCountsActive;
     }
 
     /**
@@ -104,7 +104,7 @@ class MapFormType extends AbstractType
                 ),
                 'attr' => $hideAdvancedSettings ? array('data-advanced-field' => '') : array(),
             ));
-        if ($this->showMapRedirectCounts) {
+        if ($this->redirectCountActive) {
             $builder->add('countRedirects', CheckboxType::class, array(
                 'label' => 'form.countRedirects',
                 'translation_domain' => 'AstinaRedirectManagerBundle',

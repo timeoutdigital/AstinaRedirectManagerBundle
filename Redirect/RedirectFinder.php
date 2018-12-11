@@ -24,11 +24,18 @@ class RedirectFinder implements RedirectFinderInterface
     protected $entityManager;
 
     /**
-     * @param RegistryInterface $doctrine
+     * @var bool
      */
-    public function __construct(EntityManager $entityManager)
+    private $updateRedirectCount;
+
+    /**
+     * @param RegistryInterface $doctrine
+     * @param int $updateRedirectCount
+     */
+    public function __construct(EntityManager $entityManager, $updateRedirectCount = true)
     {
         $this->entityManager = $entityManager;
+        $this->updateRedirectCount = $updateRedirectCount;
     }
 
     /**
@@ -59,10 +66,15 @@ class RedirectFinder implements RedirectFinderInterface
         $redirectUrl = $redirect->getRedirectUrl();
 
         $map = $redirect->getMap();
-        if ($map->isCountRedirects()) {
-            $map->increaseCount();
-            $this->entityManager->persist($map);
-            $this->entityManager->flush($map);
+        if ($this->updateRedirectCount && $map->isCountRedirects()) {
+            //for performance reasons we don't fetch the map entities,
+            //if we need to update the count we need to fetch the map entity
+            $mapToUpdate = $repo->findOneBy(['id' => $map->getId()]);
+            if ($mapToUpdate) {
+                $map->increaseCount();
+                $this->entityManager->persist($mapToUpdate);
+                $this->entityManager->flush($mapToUpdate);
+            }
         }
 
         return new RedirectResponse($redirectUrl, $map->getRedirectHttpCode());
