@@ -25,7 +25,7 @@ class Configuration implements ConfigurationInterface
             ->booleanNode('enable_listeners')
                 ->defaultValue(true)
             ->end()
-            ->booleanNode('show_map_redirect_counts')
+            ->booleanNode('redirect_counts_active')
                 ->defaultValue(true)
             ->end()
             ->scalarNode('base_layout')
