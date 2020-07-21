@@ -42,7 +42,7 @@ class GroupController extends Controller
             return $this->redirect($this->generateUrl('armb_homepage'));
         }
 
-        return $this->render('AstinaRedirectManagerBundle:Group:form.html.twig', array(
+        return $this->render('AstinaRedirectManagerBundle:group:form.html.twig', array(
             'group' => $group,
             'layout' => $this->container->getParameter('armb.base_layout'),
             'form' => $form->createView(),
